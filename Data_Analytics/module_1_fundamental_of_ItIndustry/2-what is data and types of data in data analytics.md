@@ -5,7 +5,6 @@
 # types of data?
  1. structured data
  2. unstructured data
-
  3. raw data
 
 # What is structured data?
@@ -51,4 +50,3 @@
    xml(xtensible markup language)
    ```
    ![alt text](image.png)
-   
