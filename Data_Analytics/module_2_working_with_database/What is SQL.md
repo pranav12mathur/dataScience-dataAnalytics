@@ -309,3 +309,215 @@ comment text
    truncate table flip_reviews;
    
   ``` 
+  # DML : data manipulation language
+   1. DML is used to manipulate data in tables
+   2. DML is used to insert|delete|update data in tables
+   **insert data in tables**
+
+   ```
+    insert into tablename (columnname1,columnname2,.....) values (value1,value2,.....);
+    or
+    insert into flip_payment values(null,1,'new',5000,12-05-2026,20-05-2026,'pending','yes');
+    ```
+   **delete data from tables**
+    1. delete is used to delete all data from tables
+    2. delete is used to delete particular data from tables
+    3. delete is used to delete alternate date from tables
+    4. delete is used to delete a range of data from tables
+    5. after delete data from tables we can rollback data
+    syntax:
+
+    ```
+     1. delete all date from tables
+     delete from tablename;
+     example:
+     delete from flip_payment;
+     2. delete particular data from tables
+     delete from tablename where columnname=value;
+     example:
+     delete from flip_payment where payment_id=1;
+     3. delete alternate data from tables
+        delete from flip_payment where paymentid in (1,3,5);
+     4. delet range of data from tables
+     delete from flip_payment where paymentid between 1 and 5;
+
+    ``` 
+    **update data in tables**
+    1. update any rows or data from tables
+     1. syntax:
+      ```
+        update tablename set columnname=value where columnname=value;
+        example:
+        update flip_payment set payment_status='success' where payment_id=1;
+      ```
+  # DQL : data query language
+    1. DQL is used to fetch data or select data from tables
+    2. DQL is used to fetch all data| particular data| alternate data| range of data| limit of data
+     from tables
+    3. DQL is uses select.
+    **examples all data from tables**
+    1. select all data from tables
+      syntax:
+    ```
+     select * from tablename;
+     example:
+     select * from flip_payment;
+    ```
+    2. select particular data from tables
+    syntax:
+    ```
+     select columnname1,columnname2 from tablename;
+     example:
+     select payment_id,payment_status from flip_payment;
+     select payment_id,payment_status from flip_payment where payment_status='pending';
+    ```
+    3. select ranege of data from tables
+    syntax:
+    ```
+     select * from tablename where columnname between value1 and value2;
+     example:
+     select * from flip_payment where payment_id between 1 and 5;
+    ```
+    4. select alternate data from tables
+    syntax:
+    ```
+     select * from tablename where columnname in (value1,value2,value3.....);
+     example:
+     select * from flip_payment where payment_id in (1,3,5);
+    ```
+    5. select data from tables using limit
+    syntax:
+    ```
+     select * from tablename limit number;
+     example:
+     select * from flip_payment limit 2,5;
+    ```
+    **order by and group by**
+  # order by 
+   1. order by filter data from data from tables in ascending and descending order
+   2. order by is used to sort data from tables in ascending and descending order
+   **syntax**
+   ```
+    select * from tablename order by columnname asc|desc;
+    example:
+    select * from flip_payment order by payment_amount desc;
+   ```
+   # SQL Aggregate Functions
+   1. SQL provides some built-in functions to perform operations on data
+   **types**
+   1. sum(): calculates the total sum of a numeric column.
+   **syntax**
+   ```
+    select sum(columnname) from tablename;
+    example:
+    select sum(salary) from flip_employee;
+   ```
+   2. count(): counts the number of rows in a table or the number of non-null values in a column.
+   **syntax**
+   ```
+    select count(columnname) from tablename;
+    example:
+    select count(*) from flip_employee;
+   ```
+    3. avg(): calculates the average value of a numeric column.
+    **syntax**
+    ```
+     select avg(columnname) from tablename;
+     example:
+     select avg(salary) from flip_employee;
+    ```
+    4. max(): returns the maximum value in a column.
+    **syntax**
+    ```
+     select max(columnname) from tablename;
+     example:
+     select max(salary) from flip_employee;
+    ```
+    5. min(): returns the minimum value in a column.
+    **syntax**
+    ```
+     select min(columnname) from tablename;
+     example:
+     select min(salary) from flip_employee;
+    ```
+    6. alias: is used to give a temporary name to a column or table in a query result.
+    **syntax**
+    ```
+     select columnname as aliasname from tablename;
+     example:
+     select salary as emp_salary from flip_employee;
+    ```
+  # SQL scalar functions
+  1. first: returns the first value in a group of values.
+  **syntax**
+  ```
+   select first(columnname) from tablename;
+   example:
+   select first(salary) from flip_employee;
+  ```
+  2. last: returns the last value in a group of values.
+  **syntax**
+  ```
+   select last(columnname) from tablename;
+   example:
+   select last(salary) from flip_employee;
+  ```
+  3. ucase: converts a string to uppercase.
+  **syntax**
+  ```
+   select ucase(columnname) from tablename;
+   example:
+   select ucase(name) from flip_employee;
+  ```
+  4. lcase: converts a string to lowercase.
+  **syntax**
+  ```
+   select lcase(columnname) from tablename;
+   example:
+   select lcase(name) from flip_employee;
+  ```
+  # group by
+   1. group by used to group data based on one or more columns
+   2. group by is used with aggregate functions like COUNT, SUM, AVG, MAX, MIN
+   **syntax**
+   ```
+    select columnname, aggregate_function(columnname) from tablename group by columnname;
+    example:
+    select payment_status, count(*) from flip_payment group by payment_status;
+   ```
+   **subquery**
+    1. query within another query is called subquery.
+    2. subquery is used to find second highest value from tables
+    **syntax**
+    ```
+     select columnname from tablename where columnname operator (select columnname from tablename where condition);
+     example:
+     select max(amount) from flip_payment where amount< (select max(amount) from flip_payment);
+     or 
+     select amount from flip_payment order by amount desc limit 1,1;
+     select amount from flip_payment order by amount desc limit 2,1;
+    ```
+
+  # like operator
+   1. like operator is used to search for a specified pattern in a column.
+   2. like operator is used with wildcard characters to match patterns in strings.
+   **wildcard characters**
+   1. % : represents zero or more characters
+   2. _ : represents a single character
+   3. [ ] : represents any single character within the brackets
+   4. [^] : represents any single character not within the brackets
+   5. - : represents a range of characters when used within brackets
+   6. | : represents an OR condition when used within brackets
+   7. \ : is used to escape special characters in the pattern
+   8.$ : represents the end of a string
+   9. ^ : represents the start of a string 
+   10. () : is used to group patterns together
+   **syntax**
+   ```
+    select * from tablename where columnname like pattern;
+    example:
+    select payment_status from flip_payment where payment_status like 'e%';
+    select payment_status from flip_payment where payment_status like '%e';
+    select payment_status from flip_payment where payment_status like '%e%';
+    select payment_status from flip_payment where payment_status like '_e%';
+   ```
