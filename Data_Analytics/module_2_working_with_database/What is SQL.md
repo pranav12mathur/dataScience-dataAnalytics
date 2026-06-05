@@ -521,3 +521,190 @@ comment text
     select payment_status from flip_payment where payment_status like '%e%';
     select payment_status from flip_payment where payment_status like '_e%';
    ```
+  # key constraints in SQL ......
+
+ 1. key constraints are used to provide a limitation on a  tables 
+ 2. key constraints are ...
+
+    1. primary key 
+    2. unique key 
+    3. foreign key  
+
+# primary key :
+
+1. A pk key never return a null values 
+2. A pk key always have an auto_increments 
+3. A pk will provides only one times in tables
+4. A pk stored a unique values 
+
+**create table with pk**
+
+create table reviews ( reviewsid int primary key AUTO_INCREMENT, name varchar(155), email varchar(255), ratings ENUM('1 star','2 star','3 star','4 star','5 star'), phone bigint, comment text
+
+);
+
+
+**create in md formate**
+
+# Reviews Table Structure
+
+| Column Name | Data Type | Size / Values | Constraints |
+|------------|-----------|---------------|-------------|
+| reviewsid | INT | - | PRIMARY KEY, AUTO_INCREMENT |
+| name | VARCHAR | 155 | NULL Allowed |
+| email | VARCHAR | 255 | NULL Allowed |
+| ratings | ENUM | '1 star', '2 star', '3 star', '4 star', '5 star' | NULL Allowed |
+| phone | BIGINT | - | NULL Allowed |
+| comment | TEXT | Large Text | NULL Allowed |
+
+
+# unique key :
+ 
+  1. A uk key return one times a null value   
+  2. A uk will provides many times in a tables on columns
+  3. A uk stored a unique values
+  4. A uk never stored an dublicate values in tables 
+  
+**create table with uk**
+
+ALTER TABLE flip_register ADD UNIQUE(email); or ALTER TABLE flip_register ADD UNIQUE(phone);
+
+  
+**note : here email and phone are unique key set and it is never stored a dublicate values**  
+
+# foreign key :
+    
+  1. A fk will provides many times in a tables on columns with common field or column
+  3. A fk are used to provides an relationship b/w one table to another table
+  4. A fk can stored an dublicate key with common field
+
+**create table with fk**
+
+# create a flip_country table
+
+create table flip_country ( cid int AUTO_INCREMENT primary key, countryname varchar(255)
+)
+
+
+# create a flip_users table 
+
+create table flip_users ( uid int AUTO_INCREMENT primary key, name varchar(255), email varchar(255), phone bigint, cid int REFERENCES flip_country(cid)
+)
+
+# create an tables with foreign key ....
+
+# ecommerce managements
+
+1. flip_category
+  ```
+    CREATE TABLE flip_category (
+    catid INT AUTO_INCREMENT PRIMARY KEY,
+    categoryname VARCHAR(255)
+  ) ENGINE=InnoDB; 
+  ```        
+2. flip_subcategory
+  ```
+    CREATE TABLE flip_subcategory (
+    subcatid INT AUTO_INCREMENT PRIMARY KEY,
+    catid INT NOT NULL,
+    subcategoryname VARCHAR(255),
+    CONSTRAINT fk_subcategory_category
+    FOREIGN KEY (catid) REFERENCES flip_category(catid)
+  ) ENGINE=InnoDB; 
+  ```
+3. flip_products
+  ```
+    CREATE TABLE flip_product (
+    productid INT AUTO_INCREMENT PRIMARY KEY,
+    catid INT NOT NULL,
+    subcatid INT NOT NULL,
+    productname VARCHAR(255) NOT NULL,
+    brand VARCHAR(100),
+    price DECIMAL(10,2),
+    stock INT,
+    description TEXT,
+    productimage VARCHAR(255),
+
+    CONSTRAINT fk_product_category
+    FOREIGN KEY (catid) REFERENCES flip_category(catid),
+
+    CONSTRAINT fk_product_subcategory
+    FOREIGN KEY (subcatid) REFERENCES flip_subcategory(subcatid)
+  ) ENGINE=InnoDB;  
+  ``` 
+
+# students managements 
+
+1. flip_courses
+  ```
+     create table flip_courses
+     (
+         courseid int AUTO_INCREMENT primary key,
+         coursename varchar(255)
+     ) ENGINE=InnoDB;
+  ```
+2. flip_faculty
+  ```
+     create table flip_faculty
+     (
+         fid int AUTO_INCREMENT primary key,
+         facultyname varchar(255),
+         constraint fk_faculty_course
+         foreign key (fid) references flip_courses(courseid)
+     ) ENGINE=InnoDB;
+  ```
+1. flip_students
+  ```
+     create table flip_students
+     (
+        sid int AUTO_INCREMENT primary key,
+        studentname varchar(255),
+        email varchar(255),
+        constraint fk_student_course
+        foreign key (sid) references flip_courses(courseid)
+        constraint fk_student_faculty
+        foreign key (sid) references flip_faculty(fid)
+     ) ENGINE=InnoDB;
+  ```
+# task managements 
+
+1. flip_priority
+  ```
+      create table flip_priority
+      (
+          priorityid int AUTO_INCREMENT primary key,
+          priorityname varchar(255)
+      ) ENGINE=InnoDB;
+  ```
+2. flip_employee 
+  ```
+      create table flip_employee
+      (
+          empid int AUTO_INCREMENT primary key,
+          empname varchar(255),
+          email varchar(255),
+          phone bigint,
+          constraint fk_employee_priority
+          foreign key (empid) references flip_priority(priorityid)
+      ) ENGINE=InnoDB;
+  ```
+3. flip_task
+  ```
+      create table flip_task
+      (
+          taskid int AUTO_INCREMENT primary key,
+          taskname varchar(255),
+          description text,
+          empid int,
+          constraint fk_task_priority
+          foreign key (empid) references flip_priority(priorityid),
+          constraint fk_task_employee
+          foreign key (empid) references flip_employee(empid)
+      ) ENGINE=InnoDB;
+  ```
+
+
+# SQL join
+
+
+   
