@@ -63,7 +63,9 @@
  6. cross join
  # What is join?
    1. join is used to join more than one coloumns data with common field or column if data matched one table to another
-   **department**
+
+
+**department**
 | dept_id | dept_name |
 |---------|-----------|
 | 1       | IT        |
