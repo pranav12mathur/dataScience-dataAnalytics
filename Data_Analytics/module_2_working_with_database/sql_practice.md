@@ -127,6 +127,7 @@ email VARCHAR(100),
 signup_date DATE,
 country VARCHAR(50)
 );
+
 CREATE TABLE Products (
 product_id INT PRIMARY KEY,
 name VARCHAR(100),
@@ -134,13 +135,17 @@ category VARCHAR(50),
 price DECIMAL(10,2),
 stock_count INT
 );
+
+
 CREATE TABLE Orders (
 order_id INT PRIMARY KEY,
 user_id INT,
 order_date DATE,
-status VARCHAR(20),
+status enum('Pending', 'Completed'),
 FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
+
+
 CREATE TABLE Order_Items (
 item_id INT PRIMARY KEY,
 order_id INT,
@@ -150,6 +155,9 @@ unit_price DECIMAL(10,2),
 FOREIGN KEY (order_id) REFERENCES Orders(order_id),
 FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
+
+
+
 Part 2: The 100 Questions (2-Hour Timer)
 The Basics (Questions 1–20)
 1. Select all columns from the Users table.
@@ -172,6 +180,8 @@ The Basics (Questions 1–20)
 18. Find users who signed up before 2022.
 19. Get the names of products that cost exactly $99.99.
 20. Show the first 10 rows of the Order_Items table.
+
+
 **answers**
 1. select * from users;
 2. select name from products where category = 'Electronics';
