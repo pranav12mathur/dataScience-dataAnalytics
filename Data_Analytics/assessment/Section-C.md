@@ -135,7 +135,7 @@ WHERE Quantity >= 5 AND Profit <= 10;
 ```
 
 
-5. Strategic Analytical Insights
+## 5. Strategic Analytical Insights
 Based on the execution of the analytical schema inside the database, the following core insights were observed:
 
 The Promotional Boundary: Profit margins maintain a positive trajectory as long as promotional discount rates stay at or below 20%. Any discount tier exceeding 20% causes profit performance to collapse rapidly into a steep deficit.
