@@ -1,0 +1,1 @@
+A string is a set of characters i.e called string
