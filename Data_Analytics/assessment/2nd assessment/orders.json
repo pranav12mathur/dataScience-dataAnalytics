@@ -1,0 +1,21 @@
+[
+    {
+        "order_id": 1,
+        "customer_name": "Pranav",
+        "items": [
+            "Pizza",
+            "Burger"
+        ],
+        "total_amount": 500.0,
+        "status": "successfull"
+    },
+    {
+        "order_id": 2,
+        "customer_name": "sxy",
+        "items": [
+            "Pizza, Burger done"
+        ],
+        "total_amount": 400.0,
+        "status": "Pending"
+    }
+]
